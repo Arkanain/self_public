@@ -1,0 +1,34 @@
+- if @user.errors.full_messages.any?
+  - @user.errors.full_messages.each do |error|
+    .error
+      = error
+
+
+= form_for @user do |f|
+  .form_field
+    = f.label :first_name
+    = f.text_field :first_name
+
+  .form_field
+    = f.label :last_name
+    = f.text_field :last_name
+
+  .form_field
+    = f.label :email
+    = f.email_field :email
+
+  .form_field
+    = f.label :role
+    = f.select :role, roles_for_select, prompt: 'Select'
+
+  .form_field
+    = f.label :password
+    = f.password_field :password
+
+  .form_field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+
+  .form_field
+    = f.submit class: 'button success'
+    = link_to 'Back', users_path, class: 'button form_back alert'

@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+
+    %title
+      Catawiki Task
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false
+    = javascript_include_tag 'application', 'data-turbolinks-track' => false
+    = csrf_meta_tags
+
+  %body{'data-no-turbolink' => ''}
+    #header
+      .container
+        = render 'layouts/header'
+    #content
+      #main_menu
+        = render 'layouts/main_menu'
+      #container
+        %div{id: "#{controller_name}"}
+          = yield

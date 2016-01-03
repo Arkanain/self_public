@@ -1,0 +1,51 @@
+#articles {
+  padding-top: 20px;
+  width: 70%;
+
+  form {
+    width: 700px;
+  }
+
+  .article_container {
+    width: 100%;
+    background-color: #ebebeb;
+    padding: 20px 0 25px 35px;
+
+    .article_title {
+      font-weight: bold;
+    }
+
+    .article_text {
+      display: inline-block;
+      width: 83%;
+      vertical-align: top;
+    }
+
+    .buttons {
+      display: inline-block;
+      width: 15%;
+      vertical-align: top;
+
+      .action {
+        margin-bottom: 5px;
+        text-align: center;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        a {
+          margin: 0;
+          font-size: 12px;
+          width: 75px;
+          padding: 5px 10px;
+
+          i, .button_text {
+            vertical-align: middle;
+            height: 13px;
+          }
+        }
+      }
+    }
+  }
+}

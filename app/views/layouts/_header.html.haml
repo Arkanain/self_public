@@ -1,0 +1,10 @@
+.logo
+  = content_tag(:b, 'cata') + 'wiki'
+.sign_out
+  - if user_signed_in?
+    %span
+      = current_user.email
+
+    = link_to action_button('Sign out', 'fa-sign-out'), destroy_user_session_path, method: :delete
+  - else
+    = link_to action_button('Sign in', 'fa-sign-in'), new_user_session_path

@@ -1,0 +1,38 @@
+#users {
+  padding-top: 20px;
+  width: 70%;
+
+  form {
+    width: 400px;
+  }
+
+  table {
+    border: none;
+    width: 100%;
+
+    .buttons {
+      width: 15%;
+
+      .action {
+        margin-bottom: 5px;
+        text-align: center;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        a {
+          margin: 0;
+          font-size: 12px;
+          width: 75px;
+          padding: 5px 10px;
+
+          i, .button_text {
+            vertical-align: middle;
+            height: 13px;
+          }
+        }
+      }
+    }
+  }
+}

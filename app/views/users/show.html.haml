@@ -1,0 +1,19 @@
+%ul
+  %li
+    %b
+      First name:
+    = @user.first_name
+
+  %li
+    %b
+      Last name:
+    = @user.last_name
+
+  %li
+    %b
+      Email:
+    = @user.email
+
+
+%p
+  = link_to 'Back', users_path, class: 'button alert'

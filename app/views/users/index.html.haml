@@ -1,0 +1,35 @@
+- unless @users.empty?
+  %table
+    %tr
+      %th
+        First name
+      %th
+        Last name
+      %th
+        Email
+      %th
+        Actions
+
+    - @users.each do |user|
+      %tr
+        %td.first_name
+          = user.first_name
+        %td.last_name
+          = user.last_name
+        %td.username
+          = user.email
+        %td.buttons
+          .action
+            = link_to action_button('View', 'fa-search'), user_path(user), class: 'button success'
+
+          - if can? :manage, user
+            .action
+              = link_to action_button('Edit', 'fa-pencil-square-o'), edit_user_path(user), class: 'button warning'
+
+            - unless current_user == user
+              .action
+                = link_to action_button('Delete', 'fa-trash-o'), user_path(user), class: 'button alert', data: { method: :delete, confirm: 'Are you sure?', remote: true }
+
+- if can? :create, User
+  .add_user
+    = link_to action_button('Add User', 'fa-plus'), new_user_path, class: 'button'

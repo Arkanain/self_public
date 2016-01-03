@@ -1,0 +1,8 @@
+.article_container
+  .article_title
+    = @article.title
+  .article_content
+    .article_text
+      = @article.text.html_safe
+
+= link_to 'Back', articles_path, class: 'button form_back alert'
