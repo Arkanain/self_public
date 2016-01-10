@@ -1,5 +1,10 @@
 .logo
-  = content_tag(:b, 'cata') + 'wiki'
+  %span.normal Self
+  %span.big p
+  %span.normal ublisher
+  %i.fa.fa-pencil
+  %span.extra ...
+
 .sign_out
   - if user_signed_in?
     %span

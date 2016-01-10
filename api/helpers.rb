@@ -1,16 +1,7 @@
 module Api
   module Helpers
-    def warden
-      env['warden']
-    end
-
-    def authenticated
-      return true if warden.authenticated?
-      params[:auth_token] && @user = User.where(authentication_token: params[:auth_token]).first
-    end
-
     def current_user
-      warden.user || @user
+      @current_user ||= User.where(authentication_token: params[:auth_token]).first
     end
 
     def permission_denied!(object, method)
@@ -21,13 +12,25 @@ module Api
       error!("401 Unauthorized", 401) unless current_user
     end
 
+    # Rewrite default method for using cancan functionality
     def present(*args)
       args[1].merge!(current_user: current_user)
       super *args
     end
 
     def can?(method, object)
-      ::Ability.new(current_user).can?(method, object)
+      ability.can?(method, object)
+    end
+
+    # For PUT and POST requests .Only permitted attributes will be saved.
+    def permitted_attributes!
+      params.slice(*options[:for]::PERMITTED)
+    end
+
+    private
+
+    def ability
+      @ability ||= ::Ability.new(current_user)
     end
   end
 end

@@ -36,8 +36,29 @@ p {
       font-size: 30px;
       margin: 5px 30px;
 
-      b {
-        font-weight: 600;
+      .normal, .big, .fa-pencil, .extra {
+        display: inline-block;
+        float: left;
+        line-height: 50px;
+        vertical-align: bottom;
+      }
+
+      .normal {
+        font-size: 20px;
+        margin-right: 3px;
+      }
+
+      .big {
+        font-size: 40px;
+        margin-top: -10px;
+      }
+
+      .fa-pencil {
+        margin: -5px 0 0 2px;
+      }
+
+      span.extra {
+        margin: -3px 0 0 -15px;
       }
     }
 

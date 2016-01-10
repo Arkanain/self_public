@@ -5,14 +5,13 @@ module Api
     prefix 'api'
     default_format :json
     format :json
-    formatter :json, Grape::Formatter::ActiveModelSerializers
 
     # Using param means that we will include version of api into path after prefix
     # Example below will create route like 'api/v1':
     # version 'v1', using: :path
 
     before do
-      authenticated
+      current_user
     end
 
     mount Api::Endpoint::Sessions

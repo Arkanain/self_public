@@ -1,12 +1,10 @@
 module Api
   module Entity
     class Article < Api::Entity::Base
+      expose :id
       expose :title
-      expose :text, as: :description
+      expose :text
       expose :user_id
-      expose :can_read do |object, options|
-        can? :read, object
-      end
       expose :can_write do |object, options|
         can? :write, object
       end

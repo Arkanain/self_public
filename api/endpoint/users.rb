@@ -1,6 +1,8 @@
 module Api
   module Endpoint
     class Users < Api::Base
+      PERMITTED = [:email, :first_name, :last_name]
+
       resources :users do
         before do
           authorized!
@@ -12,14 +14,22 @@ module Api
           present User.all, with: Api::Entity::User
         end
 
+        desc 'Return new user object'
+        get 'new' do
+          present ::User.new, with: Api::Entity::User
+        end
+
+        desc 'Return current user object'
+        get 'current_user' do
+          present (current_user || User.new), with: Api::Entity::User
+        end
+
         desc 'Create new user'
         params do
-          requires :user, type: Hash do
-            requires :email, type: String
-            requires :password, type: String
-            optional :first_name, type: String
-            optional :last_name, type: String
-          end
+          requires :email, type: String
+          requires :password, type: String
+          optional :first_name, type: String
+          optional :last_name, type: String
         end
 
         post do
@@ -28,15 +38,22 @@ module Api
           present user, with: Api::Entity::User
         end
 
+        desc 'Get single user'
+        params do
+          requires :id, type: Integer
+        end
+
+        get ':id' do
+          present ::User.find(params[:id]), with: Api::Entity::User
+        end
+
         desc 'Update user'
         params do
           requires :id, type: Integer
-          requires :user, type: Hash do
-            optional :email, type: String
-            optional :password, type: String
-            optional :first_name, type: String
-            optional :last_name, type: String
-          end
+          optional :email, type: String
+          optional :password, type: String
+          optional :first_name, type: String
+          optional :last_name, type: String
         end
 
         put ':id' do
