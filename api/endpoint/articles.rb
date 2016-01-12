@@ -9,11 +9,6 @@ module Api
           present ::Article.all, with: Api::Entity::Article
         end
 
-        desc 'Return new article object'
-        get 'new' do
-          present ::Article.new, with: Api::Entity::Article
-        end
-
         desc 'Create new article'
         params do
           requires :title, type: String

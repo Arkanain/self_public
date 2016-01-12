@@ -1,7 +1,7 @@
 module Api
   module Endpoint
     class Users < Api::Base
-      PERMITTED = [:email, :first_name, :last_name]
+      PERMITTED = [:email, :password, :password_confirmation, :role, :first_name, :last_name]
 
       resources :users do
         before do
@@ -11,29 +11,26 @@ module Api
 
         desc 'Get list of users'
         get do
-          present User.all, with: Api::Entity::User
-        end
-
-        desc 'Return new user object'
-        get 'new' do
-          present ::User.new, with: Api::Entity::User
+          present ::User.all, with: Api::Entity::User
         end
 
         desc 'Return current user object'
         get 'current_user' do
-          present (current_user || User.new), with: Api::Entity::User
+          present current_user, with: Api::Entity::User
         end
 
         desc 'Create new user'
         params do
+          requires :role, type: String
           requires :email, type: String
           requires :password, type: String
+          requires :password_confirmation, type: String
           optional :first_name, type: String
           optional :last_name, type: String
         end
 
         post do
-          user = ::User.create!(params[:user].merge(user_id: current_user))
+          user = ::User.create!(permitted_attributes!)
 
           present user, with: Api::Entity::User
         end
@@ -50,15 +47,17 @@ module Api
         desc 'Update user'
         params do
           requires :id, type: Integer
+          optional :role, type: String
           optional :email, type: String
           optional :password, type: String
+          optional :password_confirmation, type: String
           optional :first_name, type: String
           optional :last_name, type: String
         end
 
         put ':id' do
           user = ::User.find(params[:id])
-          user.update!(params[:user])
+          user.update!(permitted_attributes!)
 
           present user, with: Api::Entity::User
         end

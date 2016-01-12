@@ -1,6 +1,7 @@
 module Api
   module Entity
     class User < Api::Entity::Base
+      expose :id
       expose :email
       expose :full_name do |object, options|
         "#{object.first_name} #{object.last_name}"

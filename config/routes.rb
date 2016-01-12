@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: 'sessions'
   }
 
-  root 'dashboard#index'
+  root 'articles#index'
 
   resources :users
   resources :articles

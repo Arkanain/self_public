@@ -22,7 +22,7 @@ module Api
             user.ensure_authentication_token!
             user.save
 
-            { status: 'ok', auth_token: user.authentication_token }.to_json
+            { status: 'ok', auth_token: user.authentication_token }
           else
             error!('Invalid Email or Password.', 401)
           end
@@ -30,19 +30,15 @@ module Api
 
         desc 'Destroy auth token'
         params do
-          requires :access_token, type: :String
+          requires :auth_token, type: String
         end
 
-        delete ':access_token' do
+        delete do
           auth_token = params[:auth_token]
           user = User.where(authentication_token: auth_token).first
 
-          if user.nil?
-            error!('Invalid access token.', 401)
-          else
-            user.reset_authentication_token
-            { status: 'ok' }
-          end
+          user.reset_authentication_token
+          { status: 'ok' }
         end
       end
     end
