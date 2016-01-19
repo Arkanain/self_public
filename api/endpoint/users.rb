@@ -1,8 +1,6 @@
 module Api
   module Endpoint
     class Users < Api::Base
-      PERMITTED = [:email, :password, :password_confirmation, :role, :first_name, :last_name]
-
       resources :users do
         before do
           authorized!
@@ -30,7 +28,7 @@ module Api
         end
 
         post do
-          user = ::User.create!(permitted_attributes!)
+          user = ::User.create!(permitted_attributes!(Api::Entity::User))
 
           present user, with: Api::Entity::User
         end
@@ -57,7 +55,7 @@ module Api
 
         put ':id' do
           user = ::User.find(params[:id])
-          user.update!(permitted_attributes!)
+          user.update!(permitted_attributes!(Api::Entity::User))
 
           present user, with: Api::Entity::User
         end

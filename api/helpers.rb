@@ -23,8 +23,8 @@ module Api
     end
 
     # For PUT and POST requests .Only permitted attributes will be saved.
-    def permitted_attributes!
-      params.slice(*options[:for]::PERMITTED)
+    def permitted_attributes!(entity)
+      params.slice(*entity::PERMITTED)
     end
 
     private
