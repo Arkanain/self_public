@@ -27,7 +27,7 @@ module Api
           article = ::Article.find(params[:article_id])
           article.comments.delete(params[:comment_id])
 
-          present article.comments.reload, with: Api::Entity::Comment
+          present article.comments, with: Api::Entity::Comment
         end
       end
     end
