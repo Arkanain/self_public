@@ -11,10 +11,7 @@ module Api
     # version 'v1', using: :path
 
     before do
-      header 'Access-Control-Allow-Origin', '*'
-      header 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'
-      header 'Access-Control-Allow-Headers', 'Accept, X-Requested-With, Content-Type'
-
+      headers.each { |key, value| header(key, value) }
       current_user
     end
 
