@@ -5,11 +5,11 @@ module Api
     end
 
     def permission_denied!(object, method)
-      error!("550 Permission denied", 550, headers) unless can? method, object
+      error!("550 Permission denied", 550) unless can? method, object
     end
 
     def authorized!
-      error!("401 Unauthorized", 401, headers) unless current_user
+      error!("401 Unauthorized", 401) unless current_user
     end
 
     # Rewrite default method for using cancan functionality
@@ -28,14 +28,6 @@ module Api
     end
 
     private
-
-    def headers
-      {
-        'Access-Control-Allow-Origin' => '*',
-        'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE',
-        'Access-Control-Allow-Headers' => 'Accept, X-Requested-With, Content-Type'
-      }
-    end
 
     def ability
       @ability ||= ::Ability.new(current_user)

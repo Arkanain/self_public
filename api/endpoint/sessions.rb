@@ -24,7 +24,7 @@ module Api
 
             { status: 'ok', auth_token: user.authentication_token }
           else
-            error!('Invalid Email or Password.', 401)
+            error!('Invalid Email or Password.', 401, headers)
           end
         end
 
