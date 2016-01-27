@@ -8,7 +8,7 @@ module Api
       expose :text
       expose :user, using: Api::Entity::User
       expose :created_at do |object, options|
-        object.created_at.strftime('Written at %d/%m/%Y')
+        object.created_at.strftime('%d/%m/%Y')
       end
       expose :comments, using: Api::Entity::Comment
       expose :can_write do |object, options|
