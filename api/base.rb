@@ -1,5 +1,3 @@
-require 'rack/cors'
-
 module Api
   class Base < Grape::API
     helpers Api::Helpers
@@ -7,12 +5,6 @@ module Api
     prefix 'api'
     default_format :json
     format :json
-    use Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: :any
-      end
-    end
 
     # Using param means that we will include version of api into path after prefix
     # Example below will create route like 'api/v1':
