@@ -1,12 +1,10 @@
 class ArticlesController < ApplicationController
-  skip_before_filter :authenticate_user!
-  load_resource
-
-  def index
-    @articles = Article.all
-  end
+  skip_before_filter :authenticate_user!, only: [:index]
+  load_and_authorize_resource
 
   def create
+    @article.user = current_user
+
     if @article.save
       redirect_to articles_path
     else

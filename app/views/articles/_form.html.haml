@@ -14,8 +14,6 @@
     = f.text_area :text, rows: 15, class: 'tinymce'
     = tinymce(menubar: false)
 
-  = f.hidden_field :user_id, value: current_user.id
-
   .form_field
     = f.submit class: 'button success'
     = link_to 'Back', articles_path, class: 'button form_back alert'

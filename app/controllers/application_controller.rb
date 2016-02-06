@@ -4,20 +4,22 @@ class ApplicationController < ActionController::Base
 
   # For ActionController::Base
   protect_from_forgery with: :exception
-  before_action :check_user
   before_action :authenticate_user!
+  before_action :check_user
 
   private
 
   def check_user
     if cookies[:auth_token]
-      unless current_user
-        user = User.where(authentication_token: cookies[:auth_token]).first
+      user = User.where(authentication_token: cookies[:auth_token]).first
+      sign_in(:user, user)
+    end
+  end
 
-        sign_in(:user, user)
-      end
-    else
-      sign_out(:user)
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.all { render nothing: true, status: :forbidden }
+      format.html { render file: "#{Rails.root}/public/403.html", status: 403, layout: false }
     end
   end
 end
