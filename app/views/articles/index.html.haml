@@ -10,15 +10,16 @@
           .action
             = link_to action_button('View', 'fa-search'), article_path(article), class: 'button success'
 
-          - if can? :manage, article
+          - if can?(:edit, article)
             .action
               = link_to action_button('Edit', 'fa-pencil-square-o'), edit_article_path(article), class: 'button warning'
 
+          - if can?(:destroy, article)
             .action
               = link_to action_button('Delete', 'fa-trash-o'), article_path(article), class: 'button alert', data: { method: :delete, confirm: 'Are you sure?', remote: true }
 
     %hr
 
-- if can? :create, Article
+- if can?(:create, Article)
   .add_article
     = link_to action_button('Add Article', 'fa-plus'), new_article_path, class: 'button'

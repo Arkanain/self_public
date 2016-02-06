@@ -8,13 +8,16 @@ class Ability
 
     alias_action :create, :update, :destroy, to: :write
     alias_action :create, :read, :update, :destroy, to: :crud
+    alias_action :show, :edit, :update, to: :change
 
     case
       when user.admin?
         can :manage, :all
+        cannot :destroy, User, id: user.id
       when user.writer?
         can :read, :all
-        can :manage, User, id: user.id
+        can :change, User, id: user.id
+        cannot :index, User
         can :manage, Article, user_id: user.id
       else
         can :read, :all

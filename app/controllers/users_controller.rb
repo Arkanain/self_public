@@ -1,13 +1,9 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
-  def index
-    @users = User.all
-  end
-
   def create
     if @user.save
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       render :new
     end
@@ -17,7 +13,7 @@ class UsersController < ApplicationController
     @user.update_attributes(params[:user])
 
     if @user.valid?
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       render :edit
     end

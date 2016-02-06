@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
     @article.user = current_user
 
     if @article.save
-      redirect_to articles_path
+      redirect_to article_path(@article)
     else
       render :new
     end
@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
     @article.update_attributes(params[:article])
 
     if @article.valid?
-      redirect_to articles_path
+      redirect_to article_path(@article)
     else
       render :edit
     end

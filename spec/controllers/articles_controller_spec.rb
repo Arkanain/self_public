@@ -50,7 +50,7 @@ describe ArticlesController do
 
       expect(assigns[:article].title).to eq(new_article[:title])
       expect(assigns[:article].user_id).to eq(admin.id)
-      expect(response).to redirect_to(articles_path)
+      expect(response).to redirect_to(article_path(assigns[:article]))
     end
 
     it 'should update article' do
@@ -58,7 +58,7 @@ describe ArticlesController do
 
       expect(assigns[:article].title).to eq('Changed Title')
       expect(assigns[:article].user_id).to eq(admin.id)
-      expect(response).to redirect_to(articles_path)
+      expect(response).to redirect_to(article_path(assigns[:article]))
     end
 
     it 'should delete article' do
@@ -104,7 +104,7 @@ describe ArticlesController do
 
       expect(assigns[:article].title).to eq(new_article[:title])
       expect(assigns[:article].user_id).to eq(writer.id)
-      expect(response).to redirect_to(articles_path)
+      expect(response).to redirect_to(article_path(assigns[:article]))
     end
 
     it 'should update his own article' do
@@ -113,7 +113,7 @@ describe ArticlesController do
 
       expect(assigns[:article].title).to eq('New Writer Title')
       expect(assigns[:article].user_id).to eq(writer.id)
-      expect(response).to redirect_to(articles_path)
+      expect(response).to redirect_to(article_path(assigns[:article]))
     end
 
     it 'should delete his own article' do

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :role, :authentication_token
 
+  validates :password, :password_confirmation, presence: { on: :create }, allow_blank: { on: :update }
+
   has_many :articles
 
   ROLES = %w{admin writer}
