@@ -49,7 +49,7 @@ describe ArticlesController do
       post :create, article: new_article
 
       expect(assigns[:article].title).to eq(new_article[:title])
-      expect(assigns[:article].user_id).to eq(admin.id)
+      expect(assigns[:article].user).to eq(admin)
       expect(response).to redirect_to(article_path(assigns[:article]))
     end
 
@@ -57,7 +57,7 @@ describe ArticlesController do
       put :update, id: article, article: { title: 'Changed Title' }
 
       expect(assigns[:article].title).to eq('Changed Title')
-      expect(assigns[:article].user_id).to eq(admin.id)
+      expect(assigns[:article].user).to eq(admin)
       expect(response).to redirect_to(article_path(assigns[:article]))
     end
 
@@ -103,7 +103,7 @@ describe ArticlesController do
       post :create, article: new_article
 
       expect(assigns[:article].title).to eq(new_article[:title])
-      expect(assigns[:article].user_id).to eq(writer.id)
+      expect(assigns[:article].user).to eq(writer)
       expect(response).to redirect_to(article_path(assigns[:article]))
     end
 
@@ -112,7 +112,7 @@ describe ArticlesController do
       put :update, id: new_article, article: { title: 'New Writer Title' }
 
       expect(assigns[:article].title).to eq('New Writer Title')
-      expect(assigns[:article].user_id).to eq(writer.id)
+      expect(assigns[:article].user).to eq(writer)
       expect(response).to redirect_to(article_path(assigns[:article]))
     end
 

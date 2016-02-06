@@ -48,6 +48,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.0)
+    database_cleaner (1.5.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (3.5.2)
@@ -203,6 +204,7 @@ PLATFORMS
 
 DEPENDENCIES
   cancancan (~> 1.10)
+  database_cleaner
   devise
   devise-token_authenticatable
   factory_girl_rails
