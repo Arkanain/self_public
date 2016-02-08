@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-describe Comment do
+describe Comment, type: :model do
 
 end
