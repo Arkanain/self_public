@@ -5,18 +5,3 @@ module Support
     end
   end
 end
-
-# [:empty?,
-#  :invalid?,
-#  :informational?,
-#  :successful?,
-#  :redirection?,
-#  :client_error?,
-#  :server_error?,
-#  :ok?,
-#  :bad_request?,
-#  :forbidden?,
-#  :not_found?,
-#  :method_not_allowed?,
-#  :unprocessable?,
-#  :redirect?]
