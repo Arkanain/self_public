@@ -17,6 +17,7 @@ class Ability
       when user.writer?
         can :read, Article
         can :manage, Article, user_id: user.id
+        can :write, Comment, user_id: user.id
         can :change, User, id: user.id
       else
         can :read, Article

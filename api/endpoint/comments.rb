@@ -2,6 +2,10 @@ module Api
   module Endpoint
     class Comments < Api::Base
       resource :comments do
+        before do
+          authorized!
+        end
+
         desc 'Create comment'
         params do
           requires :text, type: String
@@ -25,7 +29,11 @@ module Api
 
         delete ':comment_id' do
           article = ::Article.find(params[:article_id])
-          article.comments.delete(params[:comment_id])
+          comment = ::Comment.find(params[:comment_id])
+
+          permission_denied!(comment, :write)
+
+          comment.destroy!
 
           present article.comments, with: Api::Entity::Comment
         end
