@@ -4,16 +4,19 @@ module Api
       resources :users do
         before do
           authorized!
-          permission_denied!(User, :manage)
         end
 
         desc 'Get list of users'
         get do
+          permission_denied!(User, :index)
+
           present ::User.all, with: Api::Entity::User
         end
 
         desc 'Return current user object'
         get 'current_user' do
+          permission_denied!(current_user, :show)
+
           present current_user, with: Api::Entity::User
         end
 
@@ -28,6 +31,8 @@ module Api
         end
 
         post do
+          permission_denied!(User, :create)
+
           user = ::User.create!(permitted_attributes!(Api::Entity::User))
 
           present user, with: Api::Entity::User
@@ -39,7 +44,11 @@ module Api
         end
 
         get ':id' do
-          present ::User.find(params[:id]), with: Api::Entity::User
+          user = ::User.find(params[:id])
+
+          permission_denied!(user, :show)
+
+          present user, with: Api::Entity::User
         end
 
         desc 'Update user'
@@ -55,6 +64,9 @@ module Api
 
         put ':id' do
           user = ::User.find(params[:id])
+
+          permission_denied!(user, :update)
+
           user.update!(permitted_attributes!(Api::Entity::User))
 
           present user, with: Api::Entity::User
@@ -67,6 +79,9 @@ module Api
 
         delete ':id' do
           user = ::User.find(params[:id])
+
+          permission_denied!(user, :destroy)
+
           user.destroy!
 
           { status: 'ok' }

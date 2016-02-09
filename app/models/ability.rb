@@ -15,14 +15,11 @@ class Ability
         can :manage, :all
         cannot :destroy, User, id: user.id
       when user.writer?
-        can :read, :all
-        can :change, User, id: user.id
-        cannot :index, User
+        can :read, Article
         can :manage, Article, user_id: user.id
+        can :change, User, id: user.id
       else
-        can :read, :all
-        cannot :manage, User
-        cannot :write, Article
+        can :read, Article
     end
 
     # The first argument to `can` is the action you are giving the user
