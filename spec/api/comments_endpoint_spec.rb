@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::Endpoint::Comments, type: :rack do
+describe Api::Endpoint::Comments do
   def app
     Api::Base
   end

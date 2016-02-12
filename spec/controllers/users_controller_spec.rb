@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UsersController, type: :controller do
+describe UsersController do
   let(:admin) { create(:admin) }
   let(:writer) { create(:writer) }
 

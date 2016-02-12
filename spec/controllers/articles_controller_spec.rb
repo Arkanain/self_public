@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ArticlesController, type: :controller do
+describe ArticlesController do
   let(:admin) { create(:admin) }
   let(:writer) { create(:writer) }
   let!(:article) { create(:article, user: admin) }

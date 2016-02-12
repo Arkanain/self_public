@@ -44,6 +44,8 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'capybara'
+  gem 'capybara-webkit'
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

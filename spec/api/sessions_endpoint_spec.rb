@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::Endpoint::Sessions, type: :rack do
+describe Api::Endpoint::Sessions do
   def app
     Api::Base
   end

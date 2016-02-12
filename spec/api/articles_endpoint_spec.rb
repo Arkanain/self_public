@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::Endpoint::Articles, type: :rack do
+describe Api::Endpoint::Articles do
   def app
     Api::Base
   end
