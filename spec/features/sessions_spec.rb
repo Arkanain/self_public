@@ -22,6 +22,7 @@ feature 'Session' do
 
     click_link('Sign out')
 
+    expect(page).not_to have_content(admin.email)
     expect(page).to have_content(article.title)
   end
 end
