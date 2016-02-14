@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes(params[:user])
+    @user.update_without_password(params[:user])
 
     if @user.valid?
       redirect_to user_path(@user)
